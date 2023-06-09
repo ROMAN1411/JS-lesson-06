@@ -61,8 +61,29 @@ const cart = {
 
     return total;
   },
-  increaseQuantity(productName) {},
-  decreaseQuantity(productName) {},
+
+  increaseQuantity(productName) {
+    console.log(productName, 'increase');
+    for (const item of this.items) {
+      if (item.name === productName) {
+        item.quantity += 1;
+      }
+    }
+  },
+
+  decreaseQuantity(productName) {
+    console.log(productName, 'decrease');
+    for (const item of this.items) {
+      if (item.name === productName) {
+        if (item.quantity > 0) {
+          item.quantity -= 1;
+        } else {
+          console.warn('Зменшити кількість НЕМОЖЛИВО!!!!!!');
+          break;
+        }
+      }
+    }
+  },
 };
 
 console.log(cart.getItems());
@@ -74,22 +95,39 @@ cart.add({ name: '🍋', price: 60 });
 cart.add({ name: '🍓', price: 110 });
 cart.add({ name: '🍓', price: 110 });
 cart.add({ name: '🍓', price: 110 });
+cart.add({ name: '🍓', price: 110 });
 
 console.table(cart.getItems());
 
-console.log('Total: ', cart.countTotalPrice());
+// console.log('Total: ', cart.countTotalPrice());
 
-cart.remove('🍇');
-console.table(cart.getItems());
+// cart.remove('🍇');
+// console.table(cart.getItems());
 
 // cart.clear();
 // console.log(cart.getItems());
 
-console.log('Total: ', cart.countTotalPrice());
+// console.log('Total: ', cart.countTotalPrice());
 
-// cart.increaseQuantity('🍎');
-// console.table(cart.getItems());
+console.log('-----------------------------------------------------');
 
-// cart.decreaseQuantity('🍋');
-// cart.decreaseQuantity('🍋');
-// console.table(cart.getItems());
+cart.increaseQuantity('🍎');
+cart.increaseQuantity('🍎');
+
+console.table(cart.getItems());
+
+cart.decreaseQuantity('🍋');
+cart.decreaseQuantity('🍋');
+cart.decreaseQuantity('🍋');
+cart.decreaseQuantity('🍋');
+
+cart.decreaseQuantity('🍇');
+cart.decreaseQuantity('🍇');
+
+cart.add({ name: '🍇', price: 60 });
+cart.add({ name: '🍇', price: 60 });
+
+cart.add({ name: '🍋', price: 60 });
+cart.increaseQuantity('🍋');
+
+console.table(cart.getItems());
